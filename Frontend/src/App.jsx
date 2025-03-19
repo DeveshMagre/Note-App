@@ -16,15 +16,12 @@ export default function App() {
   <Routes>
     <Route path='/' element={<ProtectedRoutes/>}>
         <Route index element={<Home/>}></Route>
-    
     </Route>
     <Route path='/login' element={<Login/>}/>
     <Route path='/register' element={<Register/>}/>
   </Routes>
   
   </BrowserRouter>
-  
-  
   </>
   )
 }

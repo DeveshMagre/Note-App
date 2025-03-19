@@ -11,8 +11,8 @@ export default function Login() {
   const dispatch=useDispatch()
   const navigate=useNavigate()
   const [value,setValue]=useState({
-    email:"zahidtime313@gmail.com",
-    password:"12345"
+    email:"test@gmail.com",
+    password:"test@123"
   })
 
   const hanldeChange=(e)=>{
@@ -26,9 +26,7 @@ export default function Login() {
   const handleSubmit=async(e)=>{
         e.preventDefault()
         try {
-          const request= await post('/auth/login',value)
-          // const request= await axios.post('http://localhost:5000/auth/login',value)
-         
+          const request= await post('/auth/login',value)         
           const response= request.data
           if (response.success) {
              toast.success(response.message)
@@ -39,7 +37,6 @@ export default function Login() {
         } catch (error) {
           if (error.response) {
             toast.error(error.response.data.message)
-          
           }
           console.log('error',error)
         }

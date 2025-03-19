@@ -13,9 +13,7 @@ export default function Notes({title,date,handleUpdate,handleDelete}) {
   return (
    <>
    <Modal/>
-   
-
-
+ 
   <div className="card position-relative  rounded-4 border-0" style={{width:"18rem",backgroundColor:"#FEC971"}}>
   <div class="card-body position-relative">
     <h5 class="card-title">{title}</h5>

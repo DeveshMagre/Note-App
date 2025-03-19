@@ -3,9 +3,7 @@ import React from 'react'
 export default function EidtModal({Modaltitle,handleChange,value,handleNoteSubmit}) {
   return (
   <>
-    {/* <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#eiditModal">
-  Launch demo modal
-</button> */}
+ 
    <div class="modal fade " id="eiditModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content border-0">
