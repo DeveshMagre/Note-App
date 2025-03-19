@@ -1,68 +1,89 @@
-import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { post } from '../services/ApiEndPoint'
-import toast from 'react-hot-toast'
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { post } from '../services/ApiEndPoint';
+import toast from 'react-hot-toast';
+import { Container, Paper, TextField, Button, Typography, Box } from '@mui/material';
 
 export default function Register() {
-  const navigate=useNavigate()
-  const [value,setValue]=useState({
-     userName:"",
-     email:"",
-     password:""
-  })
-  const handleChange=(e)=>{
-         setValue({
-          ...value,
-          [e.target.name]:e.target.value
-         })
-  }
-  const handleSubmit=async(e)=>{
-    e.preventDefault()
+  const navigate = useNavigate();
+  const [value, setValue] = useState({
+    userName: '',
+    email: '',
+    password: '',
+  });
 
+  const handleChange = (e) => {
+    setValue({
+      ...value,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
-      const request=await post('/auth/register',value)
-      const response= request.data
-      console.log(response)
+      const request = await post('/auth/register', value);
+      const response = request.data;
+      console.log(response);
       if (response.success) {
-        toast.success(response.message)
-        navigate('/login')
+        toast.success(response.message);
+        navigate('/login');
       }
     } catch (error) {
       if (error.response) {
-        toast.error(error.response.data.message)
+        toast.error(error.response.data.message);
       }
     }
-  }
+  };
+
   return (
-    <div className='container min-vh-100 d-flex justify-content-center align-items-center '>
-    <div className='form-container border shadow p-5 rounded-4 bg-white w-50'>
-      <h2 className='text-center mb-4 fw-bold'>Register</h2>
-      <form className='d-flex flex-column' onSubmit={handleSubmit}>
-
-        <div className="form-group mb-3">
-        <label htmlFor="Name" className='form-label'>Name</label>
-
-          <input type="text" className="form-control" name='userName' onChange={handleChange} value={value.userName} placeholder="Name" aria-label="Email" aria-describedby="basic-addon2"/>
-        </div>
-        <div className="form-group mb-3">
-        <label htmlFor="email" className='form-label'>Email</label>
-
-          <input type="email" className="form-control" name='email' onChange={handleChange} value={value.email} placeholder="Email" aria-label="Email" aria-describedby="basic-addon2"/>
-        </div>
-
-        <div className='form-group mb-3'>
-          
-          <label htmlFor="password" className='form-label'>Password</label>
-          <input type="password" className='form-control' name='password' onChange={handleChange} value={value.password} placeholder='Enter your password' id="password"/>
-        </div>
-
-        <button className='btn btn-success w-100 mb-3'>Register</button>
-
-        <div className='text-center'>
-          <p>Already have an account <Link to={'/login'}>Login</Link></p>
-        </div>
-      </form>
-    </div>
-  </div>
-  )
+    <Container component="main" maxWidth="xs" sx={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <Paper elevation={3} sx={{ p: 4, borderRadius: 3, width: '100%', maxWidth: 400 }}>
+        <Typography variant="h5" align="center" fontWeight="bold" gutterBottom>
+          Register
+        </Typography>
+        <form onSubmit={handleSubmit}>
+          <Box mb={2}>
+            <TextField
+              fullWidth
+              label="Name"
+              type="text"
+              name="userName"
+              value={value.userName}
+              onChange={handleChange}
+              variant="outlined"
+            />
+          </Box>
+          <Box mb={2}>
+            <TextField
+              fullWidth
+              label="Email"
+              type="email"
+              name="email"
+              value={value.email}
+              onChange={handleChange}
+              variant="outlined"
+            />
+          </Box>
+          <Box mb={2}>
+            <TextField
+              fullWidth
+              label="Password"
+              type="password"
+              name="password"
+              value={value.password}
+              onChange={handleChange}
+              variant="outlined"
+            />
+          </Box>
+          <Button fullWidth variant="contained"  type="submit" sx={{ mb: 2 }}>
+            Register
+          </Button>
+          <Typography variant="body2" align="center">
+            Already have an account? <Link to={'/login'} style={{ textDecoration: 'none', color: '#1976d2' }}>Login</Link>
+          </Typography>
+        </form>
+      </Paper>
+    </Container>
+  );
 }
