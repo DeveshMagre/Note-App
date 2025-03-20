@@ -3,7 +3,14 @@ import mongoose from "mongoose";
 const NotesSchema = new mongoose.Schema({
     title: {
         type: String,
-    }
+    },
+    description: {
+        type: String,
+    },
+   tags:{
+    type: [String],
+   }
+
 }, {
     timestamps: true
 });
